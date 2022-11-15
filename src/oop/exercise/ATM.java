@@ -10,7 +10,7 @@ public class ATM {
     public static void main(String[] args) {
         atmBooth();
     }
-    
+
     private static void atmBooth(){
         boolean check = true;
         while(check){
@@ -34,14 +34,14 @@ public class ATM {
                                 case 3 -> withDraw();
                                 case 4 -> {
                                     check = false;
-                                    System.out.println("Application exit.....");
+                                    System.out.println("Application exit....");
                                 }
                             }
                         }
 
                     } else System.out.println(" Incorrect Password! ");
 
-                } else System.out.println("Sorry Account Number not match!");
+                } else System.out.println("Sorry! Account Number not match!");
             } else {
                 System.out.println("Please enter number only !!!");
                 input.nextLine();
