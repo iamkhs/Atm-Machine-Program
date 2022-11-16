@@ -1,4 +1,5 @@
 package oop.exercise;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -13,39 +14,41 @@ public class ATM {
 
     private static void atmBooth(){
         boolean check = true;
+        int acNo = 0;
         while(check){
             System.out.println("Enter Your Account Number : ");
-            if (input.hasNextInt()){
-                int acNo = input.nextInt();
+            try {
+                acNo = input.nextInt();
                 input.nextLine();
-                if (acNo == acNumber){
-                    System.out.print("Enter Your Password : ");
-                    String passWord = input.nextLine();
-                    if (passWord.equals(PASSWORD)){
-                        System.out.println("Login Successful.\n");
-                        printList();
-                        while (check){
-                            System.out.print("Enter Choice: \n");
-                            int choice = input.nextInt();
-                            input.nextLine();
-                            switch (choice){
-                                case 1 -> printList();
-                                case 2 -> deposit();
-                                case 3 -> withDraw();
-                                case 4 -> {
-                                    check = false;
-                                    System.out.println("Application exit....");
-                                }
-                            }
-                        }
-
-                    } else System.out.println(" Incorrect Password! ");
-
-                } else System.out.println("Sorry! Account Number not match!");
-            } else {
-                System.out.println("Please enter number only !!!");
+            }catch (InputMismatchException e){
+                System.out.println("Please Enter number only!!!");
                 input.nextLine();
             }
+            if (acNo == acNumber){
+                System.out.print("Enter Your Password : ");
+                String passWord = input.nextLine();
+                if (passWord.equals(PASSWORD)){
+                    System.out.println("Login Successful.\n");
+                    printList();
+                    while (check){
+                        System.out.print("Enter Choice: \n");
+                        int choice = input.nextInt();
+                        input.nextLine();
+                        switch (choice){
+                            case 1 -> printList();
+                            case 2 -> deposit();
+                            case 3 -> withDraw();
+                            case 4 -> totalBalance();
+                            case 5 -> {
+                                check = false;
+                                System.out.println("Application exit....");
+                            }
+                        }
+                    }
+
+                } else System.out.println(" Incorrect Password! ");
+
+            } else System.out.println("Sorry! Account Number not match!");
         }
     }
 
@@ -56,9 +59,14 @@ public class ATM {
                 1: Check Menu
                 2: Deposit
                 3: Withdraw
-                4: Exit
+                4: Check Balance
+                5: Exit
                 """);
     }
+    private static void totalBalance(){
+        System.out.println("Your total balance is : "+accountBalance);
+    }
+
     private static void deposit(){
         System.out.print("Enter deposit Amount : ");
         int amount = input.nextInt();
